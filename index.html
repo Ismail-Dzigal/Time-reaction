@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+   
+    <title>Time reaction</title>
+   
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html;    charset=utf-8" />
+    <meta name="viewport" content="width=device-width,    initial-scale=1" />
+       
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Indie Flower">
+   
+    <style type="text/css">
+       
+      #header{
+        border:1px solid black;
+      }
+      
+      #object {
+        width: 200px;
+        height:200px;
+        position: relative;
+        background-color: rgb(66, 134, 244);
+        display: none;
+      }
+
+      h1 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 400%;
+      }
+
+      body {
+        background-color: rgb(158, 185, 229);
+        font-family: "Indie Flower";
+      }
+           
+      #description {
+        text-align: center;
+        font-style: italic;
+        font-size: 200%;
+      }
+
+      #your-time {
+        font-size: 40px;
+        font-weight: bold;
+        border:3px solid rgb(66, 134, 244);
+        background-color: rgb(66, 134, 244);
+        height: 100%;
+        padding-bottom: 530px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+
+      #time {
+        font-size: 80px;
+        font-weight: bold;
+      }
+           
+      #field{
+        border: 3px solid rgb(66, 134, 244);
+        border-left: none;
+        background-color: rgb(198, 211, 209);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+   
+    </style>    
+   
+  </head>
+   
+  <body>
+    
+    <div class="container">
+
+      <h1>Test your reaction</h1>
+   
+      <div id="description">Click on the box or circle as quickly as you can!</div>
+       
+      <div class="row">
+
+        <div class="col-md-3" id="your-time">
+          <br>
+            Your time:
+          <br>
+          <span id="time">0.000 s</span>
+        </div>
+         
+        <div class="col-md-9" id="field">
+          <div id="object">
+          </div>
+        </div>
+        
+      </div>
+       
+    </div>
+       
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <script>
+
+      var start = new Date().getTime();
+
+      function randomColor(){
+        
+        var x = Math.floor(Math.random()*256)
+        var y = Math.floor(Math.random()*256)
+        var z = Math.floor(Math.random()*256)
+        return document.getElementById("object").style.backgroundColor = "rgb(" + x + "," + y + "," + z +")";
+        
+      }
+           
+      function showObject(){
+        document.getElementById("object").style.display =   "block";
+
+        if (Math.random() > 0.5) {
+          document.getElementById("object").style.borderRadius = "50%";     
+        } else {
+            document.getElementById("object").style.borderRadius = "0";    
+        }
+                
+        document.getElementById("object").style.backgroundColor = randomColor();        
+        document.getElementById("object").style.width = (Math.random()*200+50) + "px";       
+        document.getElementById("object").style.height = document.getElementById("object").style.width;        
+        document.getElementById("object").style.top = (Math.random()*300) + "px";        
+        document.getElementById("object").style.left = (Math.random()*600) + "px";
+        document.getElementById("object").style.display = "block";
+        
+        start = new Date().getTime();
+      }
+
+      function showObjectLater(){        
+        setTimeout(showObject,1500);  
+      }
+
+      showObjectLater();
+
+      document.getElementById("object").onclick = function(){ 
+          document.getElementById("object").style.display = "none";
+          
+          showObjectLater();
+            var end = new Date().getTime();
+            var period = (end - start)/1000;
+            document.getElementById("time").innerHTML = period +" s";
+        }
+
+
+    </script>
+   
+  </body>
+
+</html>
